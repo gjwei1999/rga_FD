@@ -1,0 +1,125 @@
+2 pi w vs q2 simulated find out that lower energy and higher energy .............
+
+lab angle haru ko y axis high 120 and 70  bhanera milauna baki chha
+
+work on thrown data now
+
+your histo for
+
+class meeting 11/13/19
+how can you show every event which is not absolute zero?
+
+namespace AnalysisConstants {
+static const Int_t nTOP = 4;
+static const Int_t nEVTSEL = 5;  // nTOP(2pi evt)+EVTINC(ep->X)
+enum {
+  iTOP1,
+  iTOP2,
+  iTOP3,
+  iTOP4,
+  iEVTINC
+};  // NOTE: iEVTINC not in logical progression
+    //
+
+static const Int_t nSECTOR = 7;
+enum { iSECTOR0, iSECTOR1, iSECTOR2, iSECTOR3, iSECTOR4, iSECTOR5, iSECTOR6 };
+
+}
+
+using namespace AnalysisConstants;
+
+
+// void Histogram::Clear() {
+//   opart = h10idxE = h10idxP = h10idxPip = h10idxPim = -1;
+//   top = 0;
+//   dTop.Clear();
+//   dTop_mc.Clear();
+// }
+TObjArray* Histogram::makeYields() {
+  Int_t numHists = 3;
+  TObjArray* ret = new TObjArray(numHists);
+  Int_t hdim = 8;
+
+  float bngQ2_xmin = 0.0;
+  float bngQ2_xmax = 5.0;
+
+  Int_t bngW_bins = 400;
+  float bngW_xmin = 1.0;
+  float bngW_xmax = 3.0;
+
+  Int_t bngQ2_bins = 100;
+  Int_t bngMppip_bins = 80;  //~22 MeV/bin
+  float bngMppip_xmin = 0.938 + 0.140;
+  float bngMppip_xmax = bngW_xmax - 0.140;
+
+  Int_t bngMppim_bins = 80;  //~22 MeV/bin;
+  float bngMppim_xmin = 0.938 + 0.140;
+  float bngMppim_xmax = bngW_xmax - 0.140;
+
+  Int_t bngMpippim_bins = 80;  //~22 MeV/bin;
+  float bngMpippim_xmin = 0.140 + 0.140;
+  float bngMpippim_xmax = bngW_xmax - 0.938;
+
+  Int_t bngTheta_bins = 10;  // 10;
+  float bngTheta_xmin = 0;
+  float bngTheta_xmax = 180;
+
+  Int_t bngPhi_bins = 10;  // 10;
+  float bngPhi_xmin = 0;
+  float bngPhi_xmax = 360;
+
+  Int_t bngAlpha_bins = 1;
+  float bngAlpha_xmin = 0;
+  float bngAlpha_xmax = 360;
+
+  /* Varset 1*/
+  //                    {  h, Q2,         W,         Mppip,         Mpippim,         theta_pim,     phi_pim,
+  //                    alpha[p'pip][ppim]}
+  Int_t bins1[] = {3, bngQ2_bins, bngW_bins, bngMppip_bins, bngMpippim_bins, bngTheta_bins, bngPhi_bins, bngAlpha_bins};
+  Double_t xmin1[] = {-1,          bngQ2_xmin,   bngW_xmin, bngMppip_xmin, bngMpippim_xmin, bngTheta_xmin,
+                      bngPhi_xmin, bngAlpha_xmin};
+  Double_t xmax1[] = {2,           bngQ2_xmax,   bngW_xmax, bngMppip_xmax, bngMpippim_xmax, bngTheta_xmax,
+                      bngPhi_xmax, bngAlpha_xmax};
+  THnSparse* hN1 = new THnSparseF("yield_varset1",
+                                  "h, Q^{2}, W, M_{p#pi^{+}}, M_{#pi^{+}#pi^{-}}, #theta_{#pi^{-}}, #phi_{#pi^{-}}, "
+                                  "#alpha_{[p^{'}#pi^{+}][p#pi^{-}]}",
+                                  hdim, bins1, xmin1, xmax1);
+  hN1->Sumw2();
+  hN1->Draw("hist");
+
+  gDirectory->Append(hN1);
+  ret->Add(hN1);
+  return ret;
+}
+
+void Histogram::writeHists(TObjArray** hists, TDirectory* dirout) {
+  for (Int_t iSector = 0; iSector < 6; iSector++) {
+    // if (iSector > 0) continue;
+    Info("Histogram::writeHists()", "here1");
+    Info("Histogram::writeHists()", "cd(sector%d)", iSector);
+    dirout->cd(TString::Format("sector%d", iSector));
+    Info("Histogram::writeHists()", "here2");
+    hists[iSector]->Write();
+    Info("Histogram::writeHists()", "here3");
+  }
+  return;
+}
+
+void Histogram::deleteHists(TObjArray** hists) {
+  for (Int_t iSector = 0; iSector < 6; iSector++) {
+    Info("Histogram::deleteHists()", "here1");
+    // delete hists[iSector];
+    Info("Histogram::deleteHists()", "here2");
+  }
+  return;
+}
+//
+
+// void Histogram::fillYields(TObjArray* hists, Bool_t useMc /* = kFALSE */) {
+//   DataTop* tp = &dTop;
+//   if (useMc) tp = &dTop_mc;
+//   THnSparse* hN1 = (THnSparse*)hists->At(0);
+//   Double_t coord1[] = {tp->h,           tp->Q2,           tp->W, tp->varset1.M1, tp->varset1.M2, tp->varset1.theta,
+//                        tp->varset1.phi, tp->varset1.alpha};
+//   hN1->Fill(coord1);
+// }

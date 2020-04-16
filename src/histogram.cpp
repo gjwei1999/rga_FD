@@ -92,10 +92,15 @@ Histogram::Histogram(const std::string& output_file) {
   Q2_hist_twoPi = std::make_shared<TH1D>("Q2_twoPi", "Q2_twoPi", bins, zero, q2_max);
   W_vs_q2_twoPi = std::make_shared<TH2D>("W_vs_q2_twoPi", "W_vs_q2_twoPi", bins, zero, w_max, bins, zero, q2_max);
   
-  W_q2_15_twoPi = std::make_shared<TH1D>("W_q2_15twoPi", "W_q2_15twoPi", bins, zero, w_max);
+  W_q2_15_twoPi = std::make_shared<TH1D>("W_q2_15_twoPi", "W_q2_15_twoPi", bins, zero, w_max);
   W_q2_2_twoPi = std::make_shared<TH1D>("W_q2_2_twoPi", "W_q2_2_twoPi", bins, zero, w_max);
   W_q2_23_twoPi = std::make_shared<TH1D>("W_q2_23_twoPi", "W_q2_23_twoPi", bins, zero, w_max);
   W_q2_34_twoPi = std::make_shared<TH1D>("W_q2_34_twoPi", "W_q2_34_twoPi", bins, zero, w_max);
+  
+  W_q2_15_photon_twoPi = std::make_shared<TH1D>("W_q2_15_photon__twoPi", "W_q2_15_photon__twoPi", bins, zero, w_max);
+  W_q2_2_photon_twoPi = std::make_shared<TH1D>("W_q2_2_photon_twoPi", "W_q2_2_photon_twoPi", bins, zero, w_max);
+  W_q2_23_photon_twoPi = std::make_shared<TH1D>("W_q2_23_photon_twoPi", "W_q2_23_photon_twoPi", bins, zero, w_max);
+  W_q2_34_photon_twoPi = std::make_shared<TH1D>("W_q2_34_photon_twoPi", "W_q2_34_photon_twoPi", bins, zero, w_max);
   /////
   /////
   /////modified by Jiawei
@@ -325,15 +330,19 @@ void Histogram::Fill_WvsQ2_twoPi(const std::shared_ptr<Reaction>& _e) {
   
   if(_e->Q2()<1.5){
   W_q2_15_twoPi->Fill(_e->W(), _e->weight());
+  W_q2_15_photon_twoPi->Fill(_e->W(), _e->weight()/_e->flux());
   }
   if(_e->Q2()<2){
   W_q2_2_twoPi->Fill(_e->W(), _e->weight());
+  W_q2_2_photon_twoPi->Fill(_e->W(), _e->weight()/_e->flux());
   }
   else if(_e->Q2()>2 && _e->Q2()<3){
   W_q2_23_twoPi->Fill(_e->W(), _e->weight());
+  W_q2_23_photon_twoPi->Fill(_e->W(), _e->weight()/_e->flux());
   }
   else if(_e->Q2()>3 && _e->Q2()<4){
   W_q2_34_twoPi->Fill(_e->W(), _e->weight());
+  W_q2_34_photon_twoPi->Fill(_e->W(), _e->weight()/_e->flux());
   }
   //
   //
@@ -677,16 +686,36 @@ void Histogram::Write_WvsQ2() {
   if (MM2_twoPi->GetEntries()) MM2_twoPi->Write();
   
   W_q2_15_twoPi->SetXTitle("W (GeV)");
+  W_q2_15_twoPi->SetTitle("electron production #sigma (Q^{2}<1.5 )");
   if (W_q2_15_twoPi->GetEntries()) W_q2_15_twoPi->Write();
   
   W_q2_2_twoPi->SetXTitle("W (GeV)");
+   W_q2_2_twoPi->SetTitle("electron production #sigma (Q^{2}<2.0 )");
   if (W_q2_2_twoPi->GetEntries()) W_q2_2_twoPi->Write();
   
   W_q2_23_twoPi->SetXTitle("W (GeV)");
+   W_q2_23_twoPi->SetTitle("electron production #sigma (2.0<Q^{2}<3.0 )");
   if (W_q2_23_twoPi->GetEntries()) W_q2_23_twoPi->Write();
   
   W_q2_34_twoPi->SetXTitle("W (GeV)"); 
+  W_q2_34_twoPi->SetTitle("electron production #sigma (3.0<Q^{2}<4.0 )");
   if (W_q2_34_twoPi->GetEntries()) W_q2_34_twoPi->Write();
+  
+  W_q2_15_photon_twoPi->SetXTitle("W (GeV)");
+  W_q2_15_photon_twoPi->SetTitle("virtual phton production #sigma (Q^{2}<1.5 )");
+  if (W_q2_15_photon_twoPi->GetEntries()) W_q2_15_photon_twoPi->Write();
+  
+  W_q2_2_photon_twoPi->SetXTitle("W (GeV)");
+  W_q2_2_photon_twoPi->SetTitle("virtual phton production #sigma (Q^{2}<2.0 )");
+  if (W_q2_2_photon_twoPi->GetEntries()) W_q2_2_photon_twoPi->Write();
+  
+  W_q2_23_photon_twoPi->SetXTitle("W (GeV)");
+  W_q2_23_photon_twoPi->SetTitle("virtual phton production #sigma (2.0<Q^{2}<3.0 )");
+  if (W_q2_23_photon_twoPi->GetEntries()) W_q2_23_photon_twoPi->Write();
+  
+  W_q2_34_photon_twoPi->SetXTitle("W (GeV)");
+  W_q2_34_photon_twoPi->SetTitle("virtual phton production #sigma (3.0<Q^{2}<4.0 )");
+  if (W_q2_34_photon_twoPi->GetEntries()) W_q2_34_photon_twoPi->Write();
   //
   //
   //modified by Jiawei

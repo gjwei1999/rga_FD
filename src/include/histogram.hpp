@@ -200,6 +200,11 @@ class Histogram {
   TH1D_ptr W_q2_2_twoPi;
   TH1D_ptr W_q2_23_twoPi;
   TH1D_ptr W_q2_34_twoPi; 
+  
+  TH1D_ptr W_q2_15_photon_twoPi;
+  TH1D_ptr W_q2_2_photon_twoPi;
+  TH1D_ptr W_q2_23_photon_twoPi;
+  TH1D_ptr W_q2_34_photon_twoPi; 
   //
   //
   //

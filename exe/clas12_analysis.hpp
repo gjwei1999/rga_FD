@@ -91,6 +91,7 @@ size_t run(std::shared_ptr<TChain> _chain, std::shared_ptr<Histogram> _hists, in
       } else {
         event->SetOther(part);
       }
+       event->epsilont();
     }
     // Check the reaction class what kind of even it is and fill the appropriate histograms
     _hists->Fill_histSevenD(event);

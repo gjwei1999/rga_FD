@@ -62,6 +62,11 @@ class Reaction {
   float _MM = NAN;
   float _MM2 = NAN;
 
+  float _nu;
+  float _theta_e;
+  float _epsilont;
+  float _flux;
+  
   float _W = NAN;
   float _Q2 = NAN;
 
@@ -113,6 +118,9 @@ class Reaction {
 //        1.0;
 //  }
 
+  void epsilont();
+  float flux();
+  
   float inv_Ppip();
   float inv_Ppim();
   float inv_pip_pim();
@@ -241,7 +249,7 @@ class MCReaction : public Reaction {
   void SetMCProton(int i);
   void SetMCPip(int i);
   void SetMCPim(int i);
-
+  
   void boost_mc();
 
   float MCinv_Ppip();

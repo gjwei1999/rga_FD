@@ -35,7 +35,7 @@ void Reaction::epsilont() {
     _epsilont = 1/(1 + 2*(1+_nu*_nu/_Q2)*TMath::Tan(_theta_e/2)*TMath::Tan(_theta_e/2));
 }
 
-void Reaction::flux() {
+float Reaction::flux() {
     _flux = 1/4/137/PI/_beam_energy/_beam_energy/MASS_P/MASS_P * _W*(_W*_W-MASS_P*MASS_P);
     _flux = _flux/_Q2 /(1-_epsilont);
     return _flux;

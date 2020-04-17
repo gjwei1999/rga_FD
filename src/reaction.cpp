@@ -23,8 +23,8 @@ Reaction::Reaction(const std::shared_ptr<Branches12>& data, float beam_energy) {
   _other = std::make_unique<TLorentzVector>();
   _neutron = std::make_unique<TLorentzVector>();
 
-  _weight = // _data->mc_weight();  //
-      1.0;
+  _weight =  _data->mc_weight();  //
+    //  1.0;
 }
 
 Reaction::~Reaction() {}
@@ -36,8 +36,8 @@ void Reaction::epsilont() {
 }
 
 float Reaction::flux() {
-    _flux = 1/4/137/PI/_beam_energy/_beam_energy/MASS_P/MASS_P * _W*(_W*_W-MASS_P*MASS_P);
-    _flux = _flux/_Q2 /(1-_epsilont);
+    _flux = 1.0/4.0/137.0/PI/_beam_energy/_beam_energy/MASS_P/MASS_P * _W*(_W*_W-MASS_P*MASS_P);
+    _flux = _flux/_Q2 /(1.0-_epsilont);
     return _flux;
 }
 

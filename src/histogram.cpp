@@ -332,15 +332,15 @@ void Histogram::Fill_WvsQ2_twoPi(const std::shared_ptr<Reaction>& _e) {
   W_q2_15_twoPi->Fill(_e->W(), _e->weight());
   W_q2_15_photon_twoPi->Fill(_e->W(), _e->weight()/_e->flux());
   }
-  if(_e->Q2()<2){
+  if(_e->Q2()<2.0){
   W_q2_2_twoPi->Fill(_e->W(), _e->weight());
   W_q2_2_photon_twoPi->Fill(_e->W(), _e->weight()/_e->flux());
   }
-  else if(_e->Q2()>2 && _e->Q2()<3){
+  else if(_e->Q2()>2.0 && _e->Q2()<3.0){
   W_q2_23_twoPi->Fill(_e->W(), _e->weight());
   W_q2_23_photon_twoPi->Fill(_e->W(), _e->weight()/_e->flux());
   }
-  else if(_e->Q2()>3 && _e->Q2()<4){
+  else if(_e->Q2()>3.0 && _e->Q2()<4.0){
   W_q2_34_twoPi->Fill(_e->W(), _e->weight());
   W_q2_34_photon_twoPi->Fill(_e->W(), _e->weight()/_e->flux());
   }

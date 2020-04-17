@@ -97,7 +97,7 @@ Histogram::Histogram(const std::string& output_file) {
   W_q2_23_twoPi = std::make_shared<TH1D>("W_q2_23_twoPi", "W_q2_23_twoPi", bins, zero, w_max);
   W_q2_34_twoPi = std::make_shared<TH1D>("W_q2_34_twoPi", "W_q2_34_twoPi", bins, zero, w_max);
   
-  W_q2_15_photon_twoPi = std::make_shared<TH1D>("W_q2_15_photon__twoPi", "W_q2_15_photon__twoPi", bins, zero, w_max);
+  W_q2_15_photon_twoPi = std::make_shared<TH1D>("W_q2_15_photon_twoPi", "W_q2_15_photon_twoPi", bins, zero, w_max);
   W_q2_2_photon_twoPi = std::make_shared<TH1D>("W_q2_2_photon_twoPi", "W_q2_2_photon_twoPi", bins, zero, w_max);
   W_q2_23_photon_twoPi = std::make_shared<TH1D>("W_q2_23_photon_twoPi", "W_q2_23_photon_twoPi", bins, zero, w_max);
   W_q2_34_photon_twoPi = std::make_shared<TH1D>("W_q2_34_photon_twoPi", "W_q2_34_photon_twoPi", bins, zero, w_max);

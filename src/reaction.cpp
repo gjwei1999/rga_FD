@@ -23,8 +23,8 @@ Reaction::Reaction(const std::shared_ptr<Branches12>& data, float beam_energy) {
   _other = std::make_unique<TLorentzVector>();
   _neutron = std::make_unique<TLorentzVector>();
 
-  _weight =  _data->mc_weight();  //
-    //  1.0;
+  _weight = // _data->mc_weight();  //
+      1.0;
 }
 
 Reaction::~Reaction() {}

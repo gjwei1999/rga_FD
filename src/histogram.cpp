@@ -698,23 +698,23 @@ void Histogram::Write_WvsQ2() {
   if (W_q2_23_twoPi->GetEntries()) W_q2_23_twoPi->Write();
   
   W_q2_34_twoPi->SetXTitle("W (GeV)"); 
-  W_q2_34_twoPi->SetTitle("electron production #sigma (3.0<Q^{2}<4.0 )");
+  W_q2_34_twoPi->SetTitle("electroproduction #sigma (3.0<Q^{2}<4.0 )");
   if (W_q2_34_twoPi->GetEntries()) W_q2_34_twoPi->Write();
   
   W_q2_15_photon_twoPi->SetXTitle("W (GeV)");
-  W_q2_15_photon_twoPi->SetTitle("virtual phton production #sigma (Q^{2}<1.5 )");
+  W_q2_15_photon_twoPi->SetTitle("virtual photo-production #sigma (Q^{2}<1.5 )");
   if (W_q2_15_photon_twoPi->GetEntries()) W_q2_15_photon_twoPi->Write();
   
   W_q2_2_photon_twoPi->SetXTitle("W (GeV)");
-  W_q2_2_photon_twoPi->SetTitle("virtual phton production #sigma (Q^{2}<2.0 )");
+  W_q2_2_photon_twoPi->SetTitle("virtual photo-production #sigma (Q^{2}<2.0 )");
   if (W_q2_2_photon_twoPi->GetEntries()) W_q2_2_photon_twoPi->Write();
   
   W_q2_23_photon_twoPi->SetXTitle("W (GeV)");
-  W_q2_23_photon_twoPi->SetTitle("virtual phton production #sigma (2.0<Q^{2}<3.0 )");
+  W_q2_23_photon_twoPi->SetTitle("virtual photo-production #sigma (2.0<Q^{2}<3.0 )");
   if (W_q2_23_photon_twoPi->GetEntries()) W_q2_23_photon_twoPi->Write();
   
   W_q2_34_photon_twoPi->SetXTitle("W (GeV)");
-  W_q2_34_photon_twoPi->SetTitle("virtual phton production #sigma (3.0<Q^{2}<4.0 )");
+  W_q2_34_photon_twoPi->SetTitle("virtual photo-production #sigma (3.0<Q^{2}<4.0 )");
   if (W_q2_34_photon_twoPi->GetEntries()) W_q2_34_photon_twoPi->Write();
   //
   //

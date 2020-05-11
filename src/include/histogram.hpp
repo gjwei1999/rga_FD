@@ -195,6 +195,7 @@ class Histogram {
   TH1D_ptr W_hist_twoPi;
   TH1D_ptr Q2_hist_twoPi;
   TH2D_ptr W_vs_q2_twoPi;
+  TH2D_ptr W_vs_q2_photon_twoPi;  
   
   TH1D_ptr W_q2_15_twoPi;
   TH1D_ptr W_q2_2_twoPi;

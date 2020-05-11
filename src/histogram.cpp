@@ -91,7 +91,7 @@ Histogram::Histogram(const std::string& output_file) {
   W_hist_twoPi = std::make_shared<TH1D>("W_twoPi", "W_twoPi", bins, zero, w_max);
   Q2_hist_twoPi = std::make_shared<TH1D>("Q2_twoPi", "Q2_twoPi", bins, zero, q2_max);
   W_vs_q2_twoPi = std::make_shared<TH2D>("W_vs_q2_twoPi", "W_vs_q2_twoPi", bins, zero, w_max, bins, zero, q2_max);
-  
+  W_vs_q2_photon_twoPi = std::make_shared<TH2D>("W_vs_q2_photon_twoPi", "W_vs_q2_photon_twoPi", bins, zero, w_max, bins, zero, q2_max);   
   W_q2_15_twoPi = std::make_shared<TH1D>("W_q2_15_twoPi", "W_q2_15_twoPi", bins, zero, w_max);
   W_q2_2_twoPi = std::make_shared<TH1D>("W_q2_2_twoPi", "W_q2_2_twoPi", bins, zero, w_max);
   W_q2_23_twoPi = std::make_shared<TH1D>("W_q2_23_twoPi", "W_q2_23_twoPi", bins, zero, w_max);
@@ -323,6 +323,7 @@ void Histogram::Fill_WvsQ2_twoPi(const std::shared_ptr<Reaction>& _e) {
   alpha_pim_mc->Fill(_e->alpha_ppip_pipim(), _e->weight());
 
   W_vs_q2_twoPi->Fill(_e->W(), _e->Q2(), _e->weight());
+  W_vs_q2_photon_twoPi->Fill(_e->W(), _e->Q2(), _e->weight()/_e->flux());
   W_hist_twoPi->Fill(_e->W(), _e->weight());
   Q2_hist_twoPi->Fill(_e->Q2(), _e->weight());
   MM_twoPi->Fill(_e->MM(), _e->weight());
@@ -674,6 +675,11 @@ void Histogram::Write_WvsQ2() {
   W_vs_q2_twoPi->SetOption("COLZ1");
   if (W_vs_q2_twoPi->GetEntries()) W_vs_q2_twoPi->Write();
 
+  W_vs_q2_photon_twoPi->SetXTitle("W (GeV)");
+  W_vs_q2_photon_twoPi->SetYTitle("Q^{2} (GeV^{2})");
+  W_vs_q2_photon_twoPi->SetOption("COLZ1");
+  if (W_vs_q2_photon_twoPi->GetEntries()) W_vs_q2_photon_twoPi->Write();
+
   W_hist_twoPi->SetXTitle("W (GeV)");
   if (W_hist_twoPi->GetEntries()) W_hist_twoPi->Write();
 
@@ -686,15 +692,15 @@ void Histogram::Write_WvsQ2() {
   if (MM2_twoPi->GetEntries()) MM2_twoPi->Write();
   
   W_q2_15_twoPi->SetXTitle("W (GeV)");
-  W_q2_15_twoPi->SetTitle("electron production #sigma (Q^{2}<1.5 )");
+  W_q2_15_twoPi->SetTitle("electroproduction #sigma (Q^{2}<1.5 )");
   if (W_q2_15_twoPi->GetEntries()) W_q2_15_twoPi->Write();
   
   W_q2_2_twoPi->SetXTitle("W (GeV)");
-   W_q2_2_twoPi->SetTitle("electron production #sigma (Q^{2}<2.0 )");
+   W_q2_2_twoPi->SetTitle("electroproduction #sigma (Q^{2}<2.0 )");
   if (W_q2_2_twoPi->GetEntries()) W_q2_2_twoPi->Write();
   
   W_q2_23_twoPi->SetXTitle("W (GeV)");
-   W_q2_23_twoPi->SetTitle("electron production #sigma (2.0<Q^{2}<3.0 )");
+   W_q2_23_twoPi->SetTitle("electroproduction #sigma (2.0<Q^{2}<3.0 )");
   if (W_q2_23_twoPi->GetEntries()) W_q2_23_twoPi->Write();
   
   W_q2_34_twoPi->SetXTitle("W (GeV)"); 
